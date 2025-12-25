@@ -42,7 +42,7 @@ Update the blog section in index.html to link to your new post
 Maintain the retro gaming style and terminology
 
 🌐 LIVE SITE
-Visit the live site at: https://chebi-ant.github.io
+Visit the live site at: https://chebi-ant.github.io/Typical-Tumors/#
 🎨 DESIGN PHILOSOPHY
 
 Accessibility - Complex science made simple
