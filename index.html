@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typical Tumors: Cancer Curiosity</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            color: #00ff00;
+            background: #0a0a0a;
+            image-rendering: pixelated;
+            font-size: 10px;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.05) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        header {
+            background: #1a1a1a;
+            border-bottom: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00ff00;
+            text-shadow: 3px 3px 0 #006600, 0 0 10px #00ff00;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 0 #006600, 0 0 10px #00ff00; }
+            50% { text-shadow: 3px 3px 0 #006600, 0 0 20px #00ff00, 0 0 30px #00ff00; }
+        }
+
+        .tagline {
+            font-size: 0.7rem;
+            color: #00cc00;
+        }
+
+        .pixel-border {
+            border: 4px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        nav {
+            background: #1a1a1a;
+            border-bottom: 4px solid #00ff00;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-content a {
+            color: #00ff00;
+            text-decoration: none;
+            padding: 1rem 0.5rem;
+            font-size: 0.6rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-content a:hover, .nav-content a.active {
+            color: #ffff00;
+            border: 2px solid #ffff00;
+            background: rgba(255, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        .nav-content a::before {
+            content: '▶ ';
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .nav-content a:hover::before, .nav-content a.active::before {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            background: #1a1a1a;
+            padding: 2rem;
+            border: 4px solid #00ff00;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid #006600;
+        }
+
+        .hero h2 {
+            color: #ffff00;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 #666600;
+        }
+
+        .hero p {
+            font-size: 0.7rem;
+            color: #00cc00;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border: 4px solid #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #006600;
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            border-color: #ffff00;
+        }
+
+        .feature-card:hover::after {
+            border-color: #999900;
+        }
+
+        .feature-card h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .feature-card p {
+            color: #00cc00;
+            font-size: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #00ff00;
+            color: #000;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.5rem;
+            margin-top: 1rem;
+            border: 2px solid #006600;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.7; }
+        }
+
+        .badge.coming-soon {
+            background: #ff0000;
+            color: #fff;
+            border-color: #660000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .post-card {
+            background: #1a1a1a;
+            border: 4px solid #00ff00;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .post-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 150px;
+            background: repeating-linear-gradient(
+                45deg,
+                #003300,
+                #003300 10px,
+                #004400 10px,
+                #004400 20px
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff00;
+            font-size: 3rem;
+            border-bottom: 4px solid #00ff00;
+        }
+
+        .post-content {
+            padding: 1rem;
+        }
+
+        .post-content h3 {
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            font-size: 0.7rem;
+        }
+
+        .post-meta {
+            color: #006600;
+            font-size: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .post-excerpt {
+            color: #00cc00;
+            font-size: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 0.6rem;
+            border: 2px solid #ffff00;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .read-more:hover {
+            background: rgba(255, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        .construction {
+            background: #1a1a1a;
+            padding: 3rem 2rem;
+            border: 4px solid #ffff00;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 255, 0, 0.4);
+            position: relative;
+        }
+
+        .construction::before,
+        .construction::after {
+            content: '⚠️';
+            position: absolute;
+            font-size: 2rem;
+            animation: blink 1s infinite;
+        }
+
+        .construction::before {
+            top: 1rem;
+            left: 1rem;
+        }
+
+        .construction::after {
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .construction-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .construction h2 {
+            color: #ffff00;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .construction p {
+            color: #00ff00;
+            font-size: 0.7rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #00ff00;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #00ff00;
+            font-size: 0.6rem;
+        }
+
+        .credit-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .health-bar {
+            height: 20px;
+            background: #660000;
+            border: 2px solid #00ff00;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00 0%, #00cc00 100%);
+            width: 100%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 8px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .nav-content {
+                justify-content: center;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <h1>▲ TYPICAL TUMORS ▲</h1>
+            <p class="tagline">&gt;&gt; CANCER CURIOSITY: LEVEL UP YOUR KNOWLEDGE &lt;&lt;</p>
+            <div class="health-bar">
+                <div class="health-fill"></div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="nav-link active" data-section="home">HOME</a>
+            <a href="#" class="nav-link" data-section="blog">BLOG</a>
+            <a href="#" class="nav-link" data-section="game">GAME</a>
+            <a href="#" class="nav-link" data-section="resources">RESOURCES</a>
+            <a href="#" class="nav-link" data-section="quiz">QUIZ</a>
+            <a href="#" class="nav-link" data-section="about">ABOUT</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HOME SECTION -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h2>▼ WELCOME PLAYER ▼</h2>
+                <p>&gt; MISSION: EXPLORE CANCER SCIENCE</p>
+                <p>&gt; STATUS: READY TO LEARN</p>
+                <p style="margin-top: 1rem;">&gt; SELECT YOUR PATH BELOW TO BEGIN YOUR QUEST FOR KNOWLEDGE...</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" onclick="showSection('blog')">
+                    <h3>■ CANCER CURIOSITY</h3>
+                    <p>ACCESS MAINFRAME DATABASE. 50+ ARCHIVED ENTRIES ON CANCER BIOLOGY, TREATMENTS, AND RESEARCH.</p>
+                    <span class="badge">50+ POSTS</span>
+                </div>
+
+                <div class="feature-card" onclick="showSection('game')">
+                    <h3>■ DISEASE DUNGEON</h3>
+                    <p>ENTER THE ARENA. BATTLE CANCER CELLS. UPGRADE YOUR IMMUNE SYSTEM. LEARN THROUGH COMBAT.</p>
+                    <span class="badge coming-soon">LOCKED</span>
+                </div>
+
+                <div class="feature-card" onclick="showSection('resources')">
+                    <h3>■ DATA ARCHIVES</h3>
+                    <p>DOWNLOAD KNOWLEDGE. ACCESS GUIDES, INFOGRAPHICS, AND EDUCATIONAL PROTOCOLS.</p>
+                    <span class="badge coming-soon">LOCKED</span>
+                </div>
+
+                <div class="feature-card" onclick="showSection('quiz')">
+                    <h3>■ SKILL CHALLENGE</h3>
+                    <p>TEST YOUR STATS. CHALLENGE MODE ACTIVATED. PROVE YOUR CANCER KNOWLEDGE MASTERY.</p>
+                    <span class="badge coming-soon">LOCKED</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG SECTION -->
+        <section id="blog" class="section">
+            <div class="hero">
+                <h2>♦ BLOG DATABASE ♦</h2>
+                <p>&gt; ACCESSING CANCER CURIOSITY ARCHIVES...</p>
+                <p>&gt; LOADING SCIENTIFIC ENTRIES...</p>
+            </div>
+
+            <div class="posts-grid">
+                <div class="post-card">
+                    <div class="post-image">🧬</div>
+                    <div class="post-content">
+                        <h3>IMMUNOTHERAPY.EXE</h3>
+                        <p class="post-meta">DEC 15 2024 | 5 MIN</p>
+                        <p class="post-excerpt">SYSTEM REPORT: HOW IMMUNE CELLS ARE PROGRAMMED TO ELIMINATE HOSTILE CANCER TARGETS...</p>
+                        <a href="#" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image">🔬</div>
+                    <div class="post-content">
+                        <h3>CELL_CYCLE.DAT</h3>
+                        <p class="post-meta">DEC 10 2024 | 7 MIN</p>
+                        <p class="post-excerpt">ANALYZING DIVISION PROTOCOLS. CHEMOTHERAPY ATTACK PATTERNS DECODED...</p>
+                        <a href="#" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image">💊</div>
+                    <div class="post-content">
+                        <h3>TARGETED_THERAPY.SYS</h3>
+                        <p class="post-meta">DEC 05 2024 | 6 MIN</p>
+                        <p class="post-excerpt">PRECISION STRIKES ON GENETIC MUTATIONS. NEW WEAPONS UNLOCKED...</p>
+                        <a href="#" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image">🎗️</div>
+                    <div class="post-content">
+                        <h3>PREVENTION.LOG</h3>
+                        <p class="post-meta">NOV 28 2024 | 8 MIN</p>
+                        <p class="post-excerpt">DEFENSE PROTOCOLS ACTIVATED. EVIDENCE-BASED STRATEGIES TO REDUCE RISK LEVELS...</p>
+                        <a href="#" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image">🧪</div>
+                    <div class="post-content">
+                        <h3>LIQUID_BIOPSY.BAT</h3>
+                        <p class="post-meta">NOV 20 2024 | 5 MIN</p>
+                        <p class="post-excerpt">SCANNING BLOODSTREAM. EARLY DETECTION SYSTEM OPERATIONAL...</p>
+                        <a href="#" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-image">🧠</div>
+                    <div class="post-content">
+                        <h3>BRAIN_TUMORS.INF</h3>
+                        <p class="post-meta">NOV 15 2024 | 10 MIN</p>
+                        <p class="post-excerpt">NEURAL THREAT ASSESSMENT. COMPREHENSIVE CLASSIFICATION AND COMBAT GUIDE...</p>
+                        <a href="#" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="credit-box">
+                <p>▲ INSERT YOUR 50+ WIX POSTS HERE ▲</p>
+                <p style="margin-top: 0.5rem; font-size: 0.5rem;">THESE ARE DEMO ENTRIES FOR DISPLAY</p>
+            </div>
+        </section>
+
+        <!-- GAME SECTION -->
+        <section id="game" class="section">
+            <div class="construction">
+                <div class="construction-icon">🎮</div>
+                <h2>DISEASE DUNGEON</h2>
+                <p>&gt; SYSTEM STATUS: UNDER DEVELOPMENT</p>
+                <p>&gt; BATTLE ENGINE: LOADING...</p>
+                <p>&gt; ENEMY AI: INITIALIZING...</p>
+                <p style="margin-top: 1rem;">&gt; PREPARE FOR EPIC BOSS BATTLES AGAINST CANCER CELLS!</p>
+                <p>&gt; UPGRADE YOUR IMMUNE SYSTEM!</p>
+                <p>&gt; UNLOCK NEW TREATMENT WEAPONS!</p>
+                <p style="margin-top: 2rem; color: #ffff00;">&gt;&gt; COMING SOON &lt;&lt;</p>
+            </div>
+        </section>
+
+        <!-- RESOURCES SECTION -->
+        <section id="resources" class="section">
+            <div class="construction">
+                <div class="construction-icon">📚</div>
+                <h2>DATA ARCHIVES</h2>
+                <p>&gt; SYSTEM STATUS: COMPILING DATA</p>
+                <p>&gt; KNOWLEDGE BASE: EXPANDING...</p>
+                <p>&gt; INFOGRAPHICS: RENDERING...</p>
+                <p style="margin-top: 1rem;">&gt; COMPREHENSIVE GUIDES TO CANCER SCIENCE</p>
+                <p>&gt; DOWNLOADABLE EDUCATIONAL MATERIALS</p>
+                <p>&gt; VIDEO TUTORIALS AND MORE</p>
+                <p style="margin-top: 2rem; color: #ffff00;">&gt;&gt; COMING SOON &lt;&lt;</p>
+            </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section id="quiz" class="section">
+            <div class="construction">
+                <div class="construction-icon">🧠</div>
+                <h2>SKILL CHALLENGE</h2>
+                <p>&gt; SYSTEM STATUS: CALIBRATING DIFFICULTY</p>
+                <p>&gt; QUESTION DATABASE: LOADING...</p>
+                <p>&gt; SCORING SYSTEM: ACTIVATING...</p>
+                <p style="margin-top: 1rem;">&gt; TEST YOUR CANCER KNOWLEDGE</p>
+                <p>&gt; EARN ACHIEVEMENT BADGES</p>
+                <p>&gt; CLIMB THE LEADERBOARD</p>
+                <p style="margin-top: 2rem; color: #ffff00;">&gt;&gt; COMING SOON &lt;&lt;</p>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section">
+            <div class="hero">
+                <h2>◆ ABOUT THIS MISSION ◆</h2>
+                <p>&gt; MISSION LOG ENTRY 001:</p>
+                <p style="margin-top: 1rem;">&gt; TYPICAL TUMORS WAS CREATED TO TRANSFORM CANCER EDUCATION INTO AN ENGAGING QUEST FOR KNOWLEDGE.</p>
+                <p style="margin-top: 1rem;">&gt; PRIMARY OBJECTIVES:</p>
+                <p>&gt; - DECODE COMPLEX ONCOLOGY CONCEPTS</p>
+                <p>&gt; - EMPOWER PLAYERS WITH SCIENTIFIC KNOWLEDGE</p>
+                <p>&gt; - PRESENT DATA WITH ACCURACY AND COMPASSION</p>
+                <p style="margin-top: 1rem;">&gt; STATUS: MISSION ACTIVE</p>
+                <p>&gt; ALLIES: ALL CURIOUS MINDS WELCOME</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>█▓▒░ TYPICAL TUMORS: CANCER CURIOSITY ░▒▓█</p>
+        <p style="margin-top: 1rem;">© 2024 ALL RIGHTS RESERVED</p>
+        <p style="margin-top: 0.5rem;">&gt; POWERED BY KNOWLEDGE &lt;</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+
+        function showSection(sectionId) {
+            sections.forEach(s => s.classList.remove('active'));
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeLink) activeLink.classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.getAttribute('data-section');
+                showSection(section);
+            });
+        });
+
+        // CRT flicker effect
+        setInterval(() => {
+            document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
+        }, 100);
+    </script>
+</body>
+</html>
