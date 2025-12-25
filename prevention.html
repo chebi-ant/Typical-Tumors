@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREVENTION.LOG - Typical Tumors</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            color: #00ff00;
+            background: #0a0a0a;
+            font-size: 10px;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.05) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        header {
+            background: #1a1a1a;
+            border-bottom: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 2px solid #ffff00;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #00ff00;
+            text-shadow: 3px 3px 0 #006600, 0 0 10px #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #006600;
+            font-size: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-content {
+            background: #1a1a1a;
+            border: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+        }
+
+        .post-content::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #006600;
+        }
+
+        .post-content h2 {
+            color: #ffff00;
+            font-size: 1rem;
+            margin: 2rem 0 1rem 0;
+            text-shadow: 2px 2px 0 #666600;
+        }
+
+        .post-content p {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box-title {
+            color: #ffff00;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-title {
+            color: #ff0000;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box {
+            background: #002200;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-label {
+            color: #00cc00;
+            font-size: 0.6rem;
+        }
+
+        .stat-value {
+            color: #ffff00;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .highlight {
+            color: #ffff00;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        ul li {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        ul li::before {
+            content: '▶ ';
+            color: #ffff00;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #00ff00;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #00ff00;
+            font-size: 0.6rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 8px;
+            }
+
+            h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <a href="../index.html#blog" class="back-link">◀ BACK TO DATABASE</a>
+            <h1>🎗️ PREVENTION.LOG</h1>
+            <p class="post-meta">UPLOADED: NOV 28 2024 | ESTIMATED READ TIME: 8 MIN | CLASSIFICATION: DEFENSE PROTOCOLS</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="post-content">
+            <p>&gt; SYSTEM LOADING...</p>
+            <p>&gt; ACCESSING FILE: PREVENTION.LOG</p>
+            <p>&gt; ANALYZING RISK REDUCTION STRATEGIES...</p>
+
+            <h2>◆ THE TRUTH ABOUT PREVENTION ◆</h2>
+            <p>Let's be clear from the start: there is no magic shield that guarantees you will never get cancer. Even people who do everything "right" can develop cancer, and that is not their fault. Cancer involves complex interactions between genetics, environment, and random chance.</p>
+
+            <p>However, research shows that <span class="highlight">30-50% OF CANCERS ARE PREVENTABLE</span> through lifestyle changes and early detection. This is about stacking the odds in your favor, not achieving perfect immunity.</p>
+
+            <div class="stat-box">
+                <p class="stat-label">PREVENTION POWER LEVEL:</p>
+                <p class="stat-value">40% RISK REDUCTION</p>
+                <p class="stat-label" style="margin-top: 0.5rem;">Estimated percentage of cancers that could be prevented through lifestyle modifications and screening.</p>
+            </div>
+
+            <h2>◆ DEFENSE STRATEGY 1: QUIT SMOKING ◆</h2>
+            <p>This is the single most important thing you can do to reduce cancer risk. Smoking is linked to at least 15 different types of cancer, not just lung cancer. It causes 30% of all cancer deaths in the United States.</p>
+
+            <p><span class="highlight">THE STATS:</span> Smokers are 15-30 times more likely to develop lung cancer than non-smokers. The good news is that your risk starts dropping almost immediately after you quit. After 10 years, your lung cancer risk is cut in half compared to if you had kept smoking.</p>
+
+            <div class="warning-box">
+                <p class="warning-title">⚠️ CRITICAL WARNING ⚠️</p>
+                <p>Vaping is not a safe alternative. While research is still ongoing, e-cigarettes contain carcinogenic chemicals and can damage DNA. The long-term cancer risk is unknown but concerning.</p>
+            </div>
+
+            <h2>◆ DEFENSE STRATEGY 2: MAINTAIN HEALTHY WEIGHT ◆</h2>
+            <p>Obesity is linked to 13 different types of cancer including breast, colorectal, kidney, pancreatic, and esophageal cancer. Excess body fat promotes inflammation, disrupts hormone levels, and encourages cancer cell growth.</p>
+
+            <p>You do not need to be a fitness model. Even losing 5-10% of your body weight if you are overweight can significantly reduce cancer risk. The key is sustainable habits, not crash diets.</p>
+
+            <ul>
+                <li>Aim for at least 150 minutes of moderate exercise per week</li>
+                <li>Focus on whole foods rather than processed foods</li>
+                <li>Watch portion sizes</li>
+                <li>Build muscle through strength training</li>
+            </ul>
+
+            <h2>◆ DEFENSE STRATEGY 3: LIMIT ALCOHOL ◆</h2>
+            <p>Alcohol is a known carcinogen linked to seven types of cancer including breast, liver, colorectal, and throat cancer. When you drink alcohol, your body breaks it down into acetaldehyde, a toxic chemical that damages DNA and prevents cells from repairing that damage.</p>
+
+            <div class="stat-box">
+                <p class="stat-label">RISK MULTIPLIER:</p>
+                <p class="stat-value">+7% PER DRINK</p>
+                <p class="stat-label" style="margin-top: 0.5rem;">Each alcoholic drink per day increases breast cancer risk by approximately 7%.</p>
+            </div>
+
+            <p>Even moderate drinking carries some risk. If you choose to drink, the recommendation is no more than one drink per day for women and two for men. But less is always better when it comes to cancer prevention.</p>
+
+            <h2>◆ DEFENSE STRATEGY 4: PROTECT YOUR SKIN ◆</h2>
+            <p>Skin cancer is the most common cancer in the United States, but also one of the most preventable. UV radiation from the sun and tanning beds damages DNA in skin cells, leading to mutations.</p>
+
+            <ul>
+                <li>Use broad-spectrum SPF 30+ sunscreen every day, even when cloudy</li>
+                <li>Reapply sunscreen every two hours when outdoors</li>
+                <li>Wear protective clothing and seek shade during peak sun hours</li>
+                <li>Avoid tanning beds completely—they increase melanoma risk by 75%</li>
+                <li>Check your skin monthly for new or changing moles</li>
+            </ul>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ ACHIEVEMENT TIP ▼</p>
+                <p>One blistering sunburn in childhood or adolescence doubles your risk of melanoma later in life. Protect kids especially carefully.</p>
+            </div>
+
+            <h2>◆ DEFENSE STRATEGY 5: EAT STRATEGICALLY ◆</h2>
+            <p>No single food prevents cancer, and no single food causes it. But your overall dietary pattern matters. Here is what the evidence supports:</p>
+
+            <p><span class="highlight">POWER UP WITH:</span></p>
+            <ul>
+                <li>Colorful fruits and vegetables (aim for 5+ servings daily)</li>
+                <li>Whole grains instead of refined grains</li>
+                <li>Legumes, nuts, and seeds</li>
+                <li>Fish rich in omega-3 fatty acids</li>
+            </ul>
+
+            <p><span class="highlight">MINIMIZE THESE:</span></p>
+            <ul>
+                <li>Processed meats like bacon, hot dogs, and deli meat (classified as Group 1 carcinogens)</li>
+                <li>Red meat (limit to 18 ounces per week)</li>
+                <li>Ultra-processed foods high in sugar and unhealthy fats</li>
+                <li>Charred or burnt foods (contain carcinogenic compounds)</li>
+            </ul>
+
+            <h2>◆ DEFENSE STRATEGY 6: GET SCREENED ◆</h2>
+            <p>Screening detects cancer early when it is most treatable, or even catches precancerous changes before cancer develops. These tests save lives.</p>
+
+            <p><span class="highlight">KEY SCREENING PROTOCOLS:</span></p>
+            <ul>
+                <li>Colonoscopy starting at age 45 (earlier if family history)</li>
+                <li>Mammograms for women starting at age 40-50</li>
+                <li>Pap smears and HPV testing for cervical cancer</li>
+                <li>Low-dose CT scans for high-risk smokers</li>
+                <li>Skin checks by a dermatologist annually</li>
+            </ul>
+
+            <div class="stat-box">
+                <p class="stat-label">SCREENING SUCCESS RATE:</p>
+                <p class="stat-value">90% CURE RATE</p>
+                <p class="stat-label" style="margin-top: 0.5rem;">Colorectal cancer detected early through screening has a 90% five-year survival rate.</p>
+            </div>
+
+            <h2>◆ DEFENSE STRATEGY 7: GET VACCINATED ◆</h2>
+            <p>Yes, there are vaccines that prevent certain cancers by protecting against cancer-causing infections.</p>
+
+            <p><span class="highlight">HPV VACCINE:</span> Prevents human papillomavirus, which causes cervical, throat, and several other cancers. Most effective when given before sexual activity begins, typically ages 11-12, but available up to age 45.</p>
+
+            <p><span class="highlight">HEPATITIS B VACCINE:</span> Protects against hepatitis B virus, which can cause liver cancer. Typically given in infancy but available for adults at risk.</p>
+
+            <h2>◆ DEFENSE STRATEGY 8: KNOW YOUR FAMILY HISTORY ◆</h2>
+            <p>About 5-10% of cancers are hereditary. If multiple close relatives have had cancer, especially at young ages, you may carry genetic mutations that increase risk.</p>
+
+            <p>Talk to your doctor about genetic counseling and testing if you have a strong family history. Knowing your genetic risk allows for enhanced screening, preventive measures, or even prophylactic surgeries in high-risk cases.</p>
+
+            <h2>◆ DEFENSE STRATEGY 9: AVOID CARCINOGENS ◆</h2>
+            <p>Limit exposure to known cancer-causing substances:</p>
+            <ul>
+                <li>Radon (test your home—it is the second leading cause of lung cancer)</li>
+                <li>Asbestos in older buildings</li>
+                <li>Workplace chemicals (follow safety protocols)</li>
+                <li>Air pollution when possible</li>
+            </ul>
+
+            <h2>◆ FINAL BOSS WISDOM ◆</h2>
+            <p>Cancer prevention is not about being perfect. It is about making informed choices that reduce risk over time. Small changes add up. You do not need to overhaul your entire life overnight.</p>
+
+            <p>Pick one or two strategies to focus on first. Build those into habits. Then add more. Every positive change <span class="highlight">STRENGTHENS YOUR DEFENSE SYSTEM</span> against cancer.</p>
+
+            <p>And remember: even if you do everything right, cancer can still happen due to factors beyond your control. Prevention is about improving odds, not guarantees. If cancer does develop, it is not because you failed to prevent it.</p>
+
+            <p>&gt; END OF FILE</p>
+            <p>&gt; DEFENSE PROTOCOLS: ACTIVATED</p>
+            <p>&gt; HEALTH STATS: OPTIMIZED</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>█▓▒░ TYPICAL TUMORS: CANCER CURIOSITY ░▒▓█</p>
+        <p style="margin-top: 1rem;">© 2024 ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script>
+        setInterval(() => {
+            document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
+        }, 100);
+    </script>
+</body>
+</html>
