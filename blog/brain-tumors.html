@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN_TUMORS.INF - Typical Tumors</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            color: #00ff00;
+            background: #0a0a0a;
+            font-size: 10px;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.05) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        header {
+            background: #1a1a1a;
+            border-bottom: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 2px solid #ffff00;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #00ff00;
+            text-shadow: 3px 3px 0 #006600, 0 0 10px #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #006600;
+            font-size: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-content {
+            background: #1a1a1a;
+            border: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+        }
+
+        .post-content::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #006600;
+        }
+
+        .post-content h2 {
+            color: #ffff00;
+            font-size: 1rem;
+            margin: 2rem 0 1rem 0;
+            text-shadow: 2px 2px 0 #666600;
+        }
+
+        .post-content p {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box-title {
+            color: #ffff00;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-title {
+            color: #ff0000;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tumor-type {
+            background: #002200;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tumor-name {
+            color: #ffff00;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-display {
+            color: #00ff00;
+            font-size: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .highlight {
+            color: #ffff00;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        ul li {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        ul li::before {
+            content: '▶ ';
+            color: #ffff00;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #00ff00;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #00ff00;
+            font-size: 0.6rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 8px;
+            }
+
+            h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <a href="../index.html#blog" class="back-link">◀ BACK TO DATABASE</a>
+            <h1>🧠 BRAIN_TUMORS.INF</h1>
+            <p class="post-meta">UPLOADED: NOV 15 2025 | ESTIMATED READ TIME: 10 MIN | CLASSIFICATION: NEURO-ONCOLOGY</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="post-content">
+            <p>&gt; SYSTEM LOADING...</p>
+            <p>&gt; ACCESSING FILE: BRAIN_TUMORS.INF</p>
+            <p>&gt; SCANNING NEURAL THREAT DATABASE...</p>
+
+            <h2>◆ THE CONTROL CENTER UNDER ATTACK ◆</h2>
+            <p>Your brain is the command center for everything—thoughts, memories, movement, breathing, personality. It is protected by the skull and blood-brain barrier, making it one of the most secure locations in your body. But when tumors develop here, they present unique challenges that make brain cancer fundamentally different from other cancers.</p>
+
+            <p>Brain tumors are not a single disease. There are over 120 different types, each with different origins, behaviors, and treatment approaches. Some grow slowly and are curable with surgery alone. Others are aggressive and difficult to treat despite our best efforts.</p>
+
+            <div class="warning-box">
+                <p class="warning-title">⚠️ CRITICAL DISTINCTION ⚠️</p>
+                <p>Brain tumors can be PRIMARY (starting in the brain) or SECONDARY (metastases from cancers elsewhere like lung or breast). This guide focuses on primary brain tumors. Metastatic brain tumors are treated differently and are actually more common than primary ones.</p>
+            </div>
+
+            <h2>◆ THE GRADING SYSTEM ◆</h2>
+            <p>Brain tumors are classified by grade (how aggressive they are) and type (what kind of cells they came from). The WHO grading system ranges from Grade 1 to Grade 4:</p>
+
+            <ul>
+                <li><span class="highlight">GRADE 1:</span> Slow-growing, non-cancerous, often curable with surgery</li>
+                <li><span class="highlight">GRADE 2:</span> Relatively slow-growing but can recur or progress to higher grades</li>
+                <li><span class="highlight">GRADE 3:</span> Malignant, faster growing, requires aggressive treatment</li>
+                <li><span class="highlight">GRADE 4:</span> Highly malignant, fast-growing, most aggressive</li>
+            </ul>
+
+            <h2>◆ ENEMY TYPES: MAJOR BRAIN TUMOR CATEGORIES ◆</h2>
+
+            <div class="tumor-type">
+                <p class="tumor-name">GLIOMAS</p>
+                <p>Origin: Glial cells (support cells of the brain)</p>
+                <p>Percentage: About 80% of malignant brain tumors</p>
+                <p class="grade-display">SUBTYPES: Astrocytomas, Oligodendrogliomas, Ependymomas</p>
+            </div>
+
+            <p>Gliomas are the most common primary brain tumors in adults. They are named after the type of glial cell they originate from. Glial cells normally support and protect neurons, but when they become cancerous, they can infiltrate brain tissue extensively.</p>
+
+            <p><span class="highlight">GLIOBLASTOMA (GBM):</span> The most aggressive glioma, Grade 4. It grows rapidly and spreads throughout the brain like roots of a tree, making complete surgical removal impossible. Despite treatment, the median survival is about 15 months, though some patients live much longer. GBM is what killed senators John McCain and Ted Kennedy.</p>
+
+            <p><span class="highlight">ASTROCYTOMA:</span> Ranges from Grade 1 (pilocytic astrocytoma, often curable) to Grade 4 (glioblastoma). Lower-grade astrocytomas grow slowly and may not require immediate treatment, but they can transform into higher grades over time.</p>
+
+            <p><span class="highlight">OLIGODENDROGLIOMA:</span> Usually Grade 2 or 3. Often has genetic features (1p19q deletion) that make it more responsive to chemotherapy. Patients with these tumors often survive many years with treatment.</p>
+
+            <div class="tumor-type">
+                <p class="tumor-name">MENINGIOMAS</p>
+                <p>Origin: Meninges (membranes covering the brain)</p>
+                <p>Percentage: About 30% of all brain tumors</p>
+                <p class="grade-display">GRADE: Usually Grade 1, occasionally Grade 2-3</p>
+            </div>
+
+            <p>Meningiomas grow on the surface of the brain rather than invading brain tissue. Most are benign and slow-growing. If located in accessible areas, surgery can often cure them completely. However, tumors near critical structures or blood vessels may be inoperable. Radiation can control growth when surgery is not an option.</p>
+
+            <div class="tumor-type">
+                <p class="tumor-name">PITUITARY ADENOMAS</p>
+                <p>Origin: Pituitary gland</p>
+                <p>Percentage: About 15% of brain tumors</p>
+                <p class="grade-display">GRADE: Almost always benign</p>
+            </div>
+
+            <p>These tumors grow in the pituitary gland at the base of the skull. They cause problems either by overproducing hormones (causing conditions like Cushing's syndrome or acromegaly) or by pressing on nearby structures like the optic nerves. Most can be treated with surgery, medication, or radiation.</p>
+
+            <div class="tumor-type">
+                <p class="tumor-name">MEDULLOBLASTOMA</p>
+                <p>Origin: Cerebellum (back of brain)</p>
+                <p>Percentage: Most common malignant brain tumor in children</p>
+                <p class="grade-display">GRADE: Grade 4, but often curable with aggressive treatment</p>
+            </div>
+
+            <p>This childhood brain tumor grows in the cerebellum, which controls balance and coordination. It can spread through cerebrospinal fluid to other parts of the brain and spine. Despite being aggressive, modern treatment protocols combining surgery, radiation, and chemotherapy cure over 70% of patients.</p>
+
+            <h2>◆ WARNING SIGNS AND SYMPTOMS ◆</h2>
+            <p>Brain tumor symptoms depend on size, location, and growth rate. Because the skull is rigid, any growth increases pressure inside the head. Common symptoms include:</p>
+
+            <ul>
+                <li><span class="highlight">HEADACHES:</span> Often worse in the morning, may wake you from sleep, progressive over weeks</li>
+                <li><span class="highlight">SEIZURES:</span> New-onset seizures in adults with no prior history</li>
+                <li><span class="highlight">VISION CHANGES:</span> Blurred vision, double vision, loss of peripheral vision</li>
+                <li><span class="highlight">WEAKNESS OR NUMBNESS:</span> Often affecting one side of the body</li>
+                <li><span class="highlight">BALANCE PROBLEMS:</span> Difficulty walking, loss of coordination</li>
+                <li><span class="highlight">COGNITIVE CHANGES:</span> Memory problems, confusion, personality changes</li>
+                <li><span class="highlight">SPEECH DIFFICULTIES:</span> Trouble finding words or understanding language</li>
+                <li><span class="highlight">NAUSEA AND VOMITING:</span> Especially in the morning from increased pressure</li>
+            </ul>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ IMPORTANT NOTE ▼</p>
+                <p>Most headaches are NOT brain tumors. Brain tumor headaches are typically progressive, persistent, and associated with other neurological symptoms. But any concerning headache pattern should be evaluated by a doctor.</p>
+            </div>
+
+            <h2>◆ DIAGNOSIS: SCANNING THE BRAIN ◆</h2>
+            <p>Brain tumors are diagnosed through imaging and biopsy:</p>
+
+            <p><span class="highlight">MRI (MAGNETIC RESONANCE IMAGING):</span> The gold standard for brain tumor imaging. Provides detailed pictures of brain structures and can distinguish between different types of tissue. Contrast dye highlights areas where the blood-brain barrier is disrupted by tumor growth.</p>
+
+            <p><span class="highlight">CT SCAN:</span> Faster than MRI and good for emergencies, but less detailed. Often used when MRI is not available or for patients who cannot have MRI (those with pacemakers or metal implants).</p>
+
+            <p><span class="highlight">PET SCAN:</span> Shows metabolic activity. Aggressive tumors consume more glucose and light up brighter on PET scans. Helps distinguish active tumor from dead tissue after treatment.</p>
+
+            <p><span class="highlight">BIOPSY:</span> The only way to definitively diagnose tumor type. Can be done during surgical removal or through a needle guided by imaging. Tissue is analyzed under microscope and through molecular testing to determine exact tumor type and genetic features.</p>
+
+            <h2>◆ TREATMENT PROTOCOLS ◆</h2>
+
+            <p><span class="highlight">SURGERY:</span> The primary treatment for most brain tumors when possible. The goal is maximum safe resection—removing as much tumor as possible without damaging critical brain functions. Surgeons use advanced techniques like awake surgery (patient is conscious so surgeons can test functions during removal), intraoperative MRI, and fluorescent dyes that make tumor cells glow under special light.</p>
+
+            <p>However, not all tumors are operable. Tumors in eloquent areas (regions controlling vital functions like speech or movement) or deep within the brain may be too risky to remove completely.</p>
+
+            <p><span class="highlight">RADIATION THERAPY:</span> Uses high-energy beams to kill cancer cells. Modern techniques like stereotactic radiosurgery (Gamma Knife, CyberKnife) deliver precise radiation doses while sparing healthy tissue. Radiation is often used after surgery for high-grade tumors or as primary treatment for inoperable tumors.</p>
+
+            <p><span class="highlight">CHEMOTHERAPY:</span> Temozolomide is the standard chemotherapy for glioblastoma, usually given alongside radiation. Other chemo drugs like lomustine or PCV (procarbazine, lomustine, vincristine) are used for different tumor types. Chemotherapy for brain tumors must cross the blood-brain barrier, limiting drug options.</p>
+
+            <p><span class="highlight">TUMOR TREATING FIELDS (TTFields):</span> A newer treatment using electrical fields to disrupt cancer cell division. Patients wear a device on their head that generates alternating electrical fields. When combined with chemotherapy for glioblastoma, it extends survival by several months.</p>
+
+            <p><span class="highlight">TARGETED THERAPY:</span> Some brain tumors have specific genetic mutations that can be targeted. For example, BRAF inhibitors for tumors with BRAF mutations, or bevacizumab (Avastin) to block blood vessel formation.</p>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ THE BLOOD-BRAIN BARRIER CHALLENGE ▼</p>
+                <p>The blood-brain barrier protects the brain from toxins but also blocks most chemotherapy drugs from entering brain tissue. This makes treating brain tumors especially difficult and limits treatment options compared to other cancers.</p>
+            </div>
+
+            <h2>◆ PROGNOSIS: THE REALITY CHECK ◆</h2>
+            <p>Outcomes vary dramatically by tumor type:</p>
+
+            <ul>
+                <li><span class="highlight">LOW-GRADE GLIOMAS:</span> Median survival 5-10+ years, many patients live decades</li>
+                <li><span class="highlight">ANAPLASTIC GLIOMAS:</span> Median survival 2-5 years</li>
+                <li><span class="highlight">GLIOBLASTOMA:</span> Median survival 15 months, 5-year survival under 10%</li>
+                <li><span class="highlight">MENINGIOMAS:</span> Most are curable with surgery, over 90% 10-year survival for Grade 1</li>
+                <li><span class="highlight">MEDULLOBLASTOMA:</span> 70-80% cure rate in children with modern treatment</li>
+            </ul>
+
+            <p>These are median statistics—many patients do better, some do worse. Younger age, good overall health, complete tumor removal, and favorable genetic features all improve outcomes.</p>
+
+            <h2>◆ LIVING WITH BRAIN TUMORS ◆</h2>
+            <p>Beyond survival statistics, brain tumor patients face unique challenges:</p>
+
+            <ul>
+                <li><span class="highlight">COGNITIVE EFFECTS:</span> The tumor itself and treatments can cause memory problems, difficulty concentrating, and mental fatigue</li>
+                <li><span class="highlight">SEIZURES:</span> Many patients require anti-seizure medications long-term</li>
+                <li><span class="highlight">MOTOR DEFICITS:</span> Weakness or coordination problems may persist after treatment</li>
+                <li><span class="highlight">EMOTIONAL IMPACT:</span> Depression and anxiety are common, requiring support and sometimes medication</li>
+                <li><span class="highlight">DRIVING RESTRICTIONS:</span> Many states prohibit driving for months after seizures</li>
+            </ul>
+
+            <p>Rehabilitation including physical therapy, occupational therapy, speech therapy, and cognitive rehabilitation can help patients recover function and adapt to changes.</p>
+
+            <h2>◆ THE FUTURE: RESEARCH ADVANCES ◆</h2>
+            <p>Brain tumor research is advancing on multiple fronts:</p>
+
+            <ul>
+                <li><span class="highlight">IMMUNOTHERAPY:</span> Teaching the immune system to attack brain tumors. Checkpoint inhibitors, cancer vaccines, and CAR T-cell therapy are all being tested</li>
+                <li><span class="highlight">CONVECTION-ENHANCED DELIVERY:</span> Bypassing the blood-brain barrier by pumping drugs directly into brain tissue through catheters</li>
+                <li><span class="highlight">ONCOLYTIC VIRUSES:</span> Genetically modified viruses that infect and kill cancer cells while sparing normal brain tissue</li>
+                <li><span class="highlight">MOLECULAR PROFILING:</span> Identifying specific genetic vulnerabilities in each patient's tumor to guide personalized treatment</li>
+                <li><span class="highlight">ULTRASOUND:</span> Using focused ultrasound to temporarily open the blood-brain barrier, allowing drugs to enter</li>
+            </ul>
+
+            <h2>◆ FINAL BOSS WISDOM ◆</h2>
+            <p>Brain tumors are among the most challenging cancers to treat because of their location in the most vital organ and the barriers protecting that organ. But progress is being made. Survival rates are improving, new treatments are emerging, and our understanding of brain tumor biology grows deeper each year.</p>
+
+            <p>For patients and families, the diagnosis is devastating. But there is hope in research advances, in skilled neurosurgeons and oncologists, and in the resilience of patients who <span class="highlight">FIGHT BACK</span> against these tumors with courage and determination.</p>
+
+            <p>&gt; END OF FILE</p>
+            <p>&gt; NEURO-ONCOLOGY DATABASE: UPDATED</p>
+            <p>&gt; ACHIEVEMENT: BRAIN TUMOR EXPERT</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>█▓▒░ TYPICAL TUMORS: CANCER CURIOSITY ░▒▓█</p>
+        <p style="margin-top: 1rem;">© 2025 ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script>
+        setInterval(() => {
+            document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
+        }, 100);
+    </script>
+</body>
+</html>
