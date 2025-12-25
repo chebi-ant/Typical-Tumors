@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARGETED_THERAPY.SYS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            color: #00ff00;
+            background: #0a0a0a;
+            font-size: 10px;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.05) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        header {
+            background: #1a1a1a;
+            border-bottom: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 2px solid #ffff00;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #00ff00;
+            text-shadow: 3px 3px 0 #006600, 0 0 10px #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #006600;
+            font-size: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-content {
+            background: #1a1a1a;
+            border: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+        }
+
+        .post-content::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #006600;
+        }
+
+        .post-content h2 {
+            color: #ffff00;
+            font-size: 1rem;
+            margin: 2rem 0 1rem 0;
+            text-shadow: 2px 2px 0 #666600;
+        }
+
+        .post-content p {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box-title {
+            color: #ffff00;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-title {
+            color: #ff0000;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        ul li {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        ul li::before {
+            content: '▶ ';
+            color: #ffff00;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #00ff00;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #00ff00;
+            font-size: 0.6rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 8px;
+            }
+
+            h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <header>
+        <div class="header-content">
+            <a href="../index.html#blog" class="back-link">◀ BACK TO DATABASE</a>
+            <h1>🧠 BRAIN_TUMORS.INF</h1>
+            <p class="post-meta">UPLOADED: DEC 24 2025 | ESTIMATED READ TIME: 8 MIN | CLASSIFICATION: NEURO-ONCOLOGY</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="post-content">
+            <p>&gt; SYSTEM LOADING...</p>
+            <p>&gt; ACCESSING FILE: TARGETED_THERAPY.INF</p>
+            <p>&gt; SCANNING NEURO-ONCOLOGY DATABASE...</p>
+
+            <h2>◆ TARGETED THERAPY: PRECISION STRIKE ◆</h2>
+            <p>Targeted therapy represents a paradigm shift in cancer treatment. Unlike traditional chemotherapy, which attacks all rapidly dividing cells, targeted therapy seeks specific molecular vulnerabilities within tumor cells, allowing for precision treatment with reduced damage to healthy tissue.</p>
+
+            <p>These therapies are particularly relevant in brain tumors, where the delicate structures and the blood-brain barrier make conventional treatment risky and often less effective.</p>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ ADVANTAGE OF PRECISION ▼</p>
+                <p>By targeting specific mutations or pathways, these drugs can slow tumor growth, shrink tumors, and sometimes extend survival without the intense side effects of traditional chemotherapy.</p>
+            </div>
+
+            <h2>◆ HOW TARGETED THERAPY WORKS ◆</h2>
+            <p>Targeted therapies act on specific molecules that drive tumor growth:</p>
+
+            <ul>
+                <li><span class="highlight">KINASE INHIBITORS:</span> Block abnormal signaling proteins that tell cancer cells to grow and divide</li>
+                <li><span class="highlight">ANGIOGENESIS INHIBITORS:</span> Prevent the formation of new blood vessels that feed tumors, starving them of nutrients</li>
+                <li><span class="highlight">IMMUNE MODULATORS:</span> Enhance immune recognition of tumor cells</li>
+                <li><span class="highlight">GENE-SPECIFIC DRUGS:</span> Target specific mutations like BRAF V600E, EGFR amplification, or IDH1 mutations</li>
+            </ul>
+
+            <div class="warning-box">
+                <p class="warning-title">⚠️ LIMITATIONS ⚠️</p>
+                <p>Not all tumors have identifiable targets. Resistance can develop as tumors evolve. Regular molecular profiling is often required to adjust therapy over time.</p>
+            </div>
+
+            <h2>◆ TARGETED THERAPIES IN BRAIN TUMORS ◆</h2>
+            <p>Examples of targeted therapy applications:</p>
+
+            <ul>
+                <li><span class="highlight">BRAF INHIBITORS:</span> For tumors with BRAF mutations, often seen in certain gliomas</li>
+                <li><span class="highlight">EGFR INHIBITORS:</span> For tumors overexpressing EGFR, common in glioblastoma</li>
+                <li><span class="highlight">VEGF INHIBITORS:</span> Bevacizumab to reduce tumor angiogenesis and edema</li>
+                <li><span class="highlight">IDH1 INHIBITORS:</span> Targeting IDH1-mutant gliomas</li>
+            </ul>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ BLOOD-BRAIN BARRIER CHALLENGE ▼</p>
+                <p>Even targeted drugs must penetrate the blood-brain barrier. Some are modified for better CNS penetration or delivered directly via infusion into brain tissue.</p>
+            </div>
+
+            <h2>◆ COMBINATION STRATEGIES ◆</h2>
+            <p>Targeted therapy is rarely used alone. It can be combined with:</p>
+
+            <ul>
+                <li><span class="highlight">SURGERY:</span> Removing bulk tumor before molecular therapy</li>
+                <li><span class="highlight">RADIATION:</span> Synergistic effects on tumor cells</li>
+                <li><span class="highlight">IMMUNOTHERAPY:</span> Enhancing immune response against residual tumor</li>
+                <li><span class="highlight">CHEMOTHERAPY:</span> Sometimes combined for aggressive or resistant tumors</li>
+            </ul>
+
+            <h2>◆ PROGNOSIS AND OUTLOOK ◆</h2>
+            <p>Patients receiving targeted therapy may experience longer progression-free survival, improved quality of life, and fewer systemic side effects. However, response depends on:</p>
+
+            <ul>
+                <li><span class="highlight">IDENTIFICATION OF MUTATION:</span> Accurate genetic profiling is critical</li>
+                <li><span class="highlight">TUMOR HETEROGENEITY:</span> Not all cells may carry the target mutation</li>
+                <li><span class="highlight">DEVELOPMENT OF RESISTANCE:</span> Tumors may evolve, necessitating new drugs</li>
+            </ul>
+
+            <h2>◆ THE FUTURE OF TARGETED THERAPY ◆</h2>
+            <p>Research continues to expand the arsenal of targeted agents, including:</p>
+
+            <ul>
+                <li><span class="highlight">NEXT-GENERATION KINASE INHIBITORS:</span> More potent, selective, and brain-penetrant</li>
+                <li><span class="highlight">COMBINATION MOLECULAR THERAPIES:</span> Multiple targets in a single tumor addressed simultaneously</li>
+                <li><span class="highlight">PERSONALIZED MEDICINE:</span> Tailoring therapy to the patient’s tumor profile using AI-guided algorithms</li>
+                <li><span class="highlight">NOVEL DELIVERY METHODS:</span> Nanoparticles, focused ultrasound, and convection-enhanced delivery to bypass the blood-brain barrier</li>
+            </ul>
+
+            <h2>◆ FINAL THOUGHTS ◆</h2>
+            <p>Targeted therapy represents the future of neuro-oncology: precision strikes against specific tumor vulnerabilities. While challenges remain, especially with drug resistance and delivery to the brain, ongoing research and clinical trials are pushing the boundaries of what’s possible.</p>
+
+            <p>&gt; END OF FILE</p>
+            <p>&gt; NEURO-ONCOLOGY DATABASE: UPDATED</p>
+            <p>&gt; ACHIEVEMENT: TARGETED THERAPY EXPERT</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>█▓▒░ TARGETED THERAPY: PRECISION ONCOLOGY ░▒▓█</p>
+        <p style="margin-top: 1rem;">© 2025 ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script>
+        setInterval(() => {
+            document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
+        }, 100);
+    </script>
+</body>
+</html>
