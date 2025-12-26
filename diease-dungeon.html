@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISEASE DUNGEON - Typical Tumors</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: #0a0a0a;
+            color: #00ff00;
+            font-size: 10px;
+            overflow: hidden;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.05) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        #game-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .back-link {
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 2px solid #ffff00;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        .screen {
+            display: none;
+            background: #1a1a1a;
+            border: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            min-height: 500px;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            color: #ffff00;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 0 #666600, 0 0 10px #ffff00;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 0 #666600, 0 0 10px #ffff00; }
+            50% { text-shadow: 3px 3px 0 #666600, 0 0 20px #ffff00; }
+        }
+
+        .title-screen {
+            text-align: center;
+        }
+
+        .title-logo {
+            font-size: 2rem;
+            margin: 2rem 0;
+            line-height: 1.5;
+        }
+
+        .game-button {
+            background: #003300;
+            border: 3px solid #00ff00;
+            color: #00ff00;
+            padding: 1rem 2rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s;
+        }
+
+        .game-button:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            background: #002200;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.6rem;
+            color: #00cc00;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            color: #ffff00;
+        }
+
+        .health-bar, .enemy-health-bar {
+            width: 100%;
+            height: 25px;
+            background: #660000;
+            border: 2px solid #00ff00;
+            margin-top: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .health-fill, .enemy-health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00 0%, #00cc00 100%);
+            transition: width 0.5s;
+        }
+
+        .battle-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .player-side, .enemy-side {
+            background: #002200;
+            border: 3px solid #00ff00;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .enemy-side {
+            border-color: #ff0000;
+            background: #220000;
+        }
+
+        .character-sprite {
+            font-size: 4rem;
+            margin: 1rem 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .enemy-sprite {
+            font-size: 4rem;
+            margin: 1rem 0;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            background: #003300;
+            border: 3px solid #00ff00;
+            color: #00ff00;
+            padding: 1.5rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover:not(:disabled) {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+        }
+
+        .action-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .battle-log {
+            background: #001100;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            height: 150px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            line-height: 1.8;
+        }
+
+        .log-entry {
+            margin: 0.5rem 0;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-10px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .log-damage { color: #ff0000; }
+        .log-heal { color: #00ff00; }
+        .log-info { color: #ffff00; }
+
+        .enemy-info {
+            background: #110000;
+            border: 2px solid #ff0000;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.6rem;
+            line-height: 1.6;
+        }
+
+        .victory-screen, .game-over-screen {
+            text-align: center;
+        }
+
+        .victory-screen h2, .game-over-screen h2 {
+            font-size: 2rem;
+            margin: 2rem 0;
+        }
+
+        .knowledge-gained {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+            font-size: 0.7rem;
+            line-height: 1.8;
+        }
+
+        .inventory {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .item {
+            background: #002200;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.6rem;
+        }
+
+        .floor-indicator {
+            text-align: center;
+            font-size: 1rem;
+            color: #ffff00;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            body { font-size: 8px; }
+            .battle-area { grid-template-columns: 1fr; }
+            .actions { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div id="game-container">
+        <a href="../index.html" class="back-link">◀ BACK TO MAIN</a>
+
+        <!-- TITLE SCREEN -->
+        <div id="title-screen" class="screen active">
+            <div class="title-screen">
+                <div class="title-logo">
+                    🎮<br>
+                    DISEASE<br>
+                    DUNGEON<br>
+                    🎮
+                </div>
+                <p style="margin: 2rem 0; font-size: 0.8rem;">BATTLE CANCER CELLS<br>LEARN TREATMENTS<br>SAVE THE BODY</p>
+                <button class="game-button" onclick="startGame()">▶ START QUEST</button>
+                <button class="game-button" onclick="showInstructions()">📖 HOW TO PLAY</button>
+            </div>
+        </div>
+
+        <!-- INSTRUCTIONS SCREEN -->
+        <div id="instructions-screen" class="screen">
+            <h1>◆ MISSION BRIEFING ◆</h1>
+            <div style="font-size: 0.7rem; line-height: 1.8;">
+                <p style="margin-bottom: 1rem;">You are an elite treatment unit fighting cancer cells through the body's systems. Each floor presents new enemies with unique weaknesses.</p>
+                
+                <p style="color: #ffff00; margin: 1rem 0;">▼ COMBAT SYSTEM ▼</p>
+                <p>• ATTACK: Deal damage to enemies<br>
+                • TARGETED THERAPY: Exploits enemy weaknesses for massive damage<br>
+                • IMMUNOTHERAPY: Boost your defense and heal<br>
+                • ANALYZE: Learn about the enemy (highly recommended!)</p>
+                
+                <p style="color: #ffff00; margin: 1rem 0;">▼ PROGRESSION ▼</p>
+                <p>• Defeat enemies to advance floors<br>
+                • Each victory teaches real cancer science<br>
+                • Collect treatments to become stronger<br>
+                • Reach floor 5 to win the game</p>
+                
+                <p style="color: #ffff00; margin: 1rem 0;">▼ STRATEGY TIPS ▼</p>
+                <p>• Always ANALYZE enemies first to learn weaknesses<br>
+                • Use IMMUNOTHERAPY when health is low<br>
+                • TARGETED THERAPY deals 3x damage but requires energy<br>
+                • Read the knowledge sections - they contain real cancer facts!</p>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="game-button" onclick="showScreen('title-screen')">◀ BACK</button>
+            </div>
+        </div>
+
+        <!-- BATTLE SCREEN -->
+        <div id="battle-screen" class="screen">
+            <div class="floor-indicator">
+                FLOOR <span id="floor-number">1</span> / 5
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-label">HEALTH</div>
+                    <div class="stat-value" id="player-hp">100</div>
+                    <div class="health-bar"><div class="health-fill" id="player-health-bar"></div></div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">ENERGY</div>
+                    <div class="stat-value" id="player-energy">3</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">LEVEL</div>
+                    <div class="stat-value" id="player-level">1</div>
+                </div>
+            </div>
+
+            <div class="battle-area">
+                <div class="player-side">
+                    <div class="stat-label">TREATMENT UNIT</div>
+                    <div class="character-sprite">💉</div>
+                    <div style="font-size: 0.7rem; color: #00ff00;">READY</div>
+                </div>
+
+                <div class="enemy-side">
+                    <div class="stat-label" style="color: #ff0000;">ENEMY</div>
+                    <div class="enemy-sprite" id="enemy-sprite">🦠</div>
+                    <div style="font-size: 0.8rem; color: #ff0000;" id="enemy-name">CANCER CELL</div>
+                    <div class="enemy-health-bar">
+                        <div class="enemy-health-fill" id="enemy-health-bar"></div>
+                    </div>
+                    <div style="font-size: 0.6rem; margin-top: 0.5rem;" id="enemy-hp">HP: 50/50</div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="action-btn" onclick="playerAttack()">⚔️ ATTACK<br><span style="font-size: 0.5rem;">Basic damage</span></button>
+                <button class="action-btn" onclick="playerTargetedTherapy()" id="targeted-btn">🎯 TARGETED<br><span style="font-size: 0.5rem;">2.2x damage (1 energy)</span></button>
+                <button class="action-btn" onclick="playerImmunotherapy()">🛡️ IMMUNO<br><span style="font-size: 0.5rem;">Heal + defense</span></button>
+                <button class="action-btn" onclick="analyzeEnemy()" id="analyze-btn">🔬 ANALYZE<br><span style="font-size: 0.5rem;">Learn weakness</span></button>
+            </div>
+
+            <div class="battle-log" id="battle-log"></div>
+
+            <div class="enemy-info" id="enemy-info" style="display: none;">
+                <p style="color: #ffff00; margin-bottom: 0.5rem;">▼ ANALYSIS COMPLETE ▼</p>
+                <p id="enemy-description"></p>
+            </div>
+        </div>
+
+        <!-- VICTORY SCREEN -->
+        <div id="victory-screen" class="screen">
+            <div class="victory-screen">
+                <h2 style="color: #00ff00;">◆ VICTORY ◆</h2>
+                <p style="font-size: 0.8rem; margin: 1rem 0;">ENEMY ELIMINATED!</p>
+                
+                <div class="knowledge-gained" id="knowledge-content">
+                    <p style="color: #ffff00; margin-bottom: 1rem;">▼ KNOWLEDGE ACQUIRED ▼</p>
+                    <p id="knowledge-text"></p>
+                </div>
+
+                <button class="game-button" onclick="nextFloor()">▶ NEXT FLOOR</button>
+            </div>
+        </div>
+
+        <!-- GAME OVER SCREEN -->
+        <div id="game-over-screen" class="screen">
+            <div class="game-over-screen">
+                <h2 style="color: #ff0000;">◆ GAME OVER ◆</h2>
+                <p style="font-size: 0.8rem; margin: 2rem 0;">THE CANCER SPREAD</p>
+                <p style="font-size: 0.7rem; margin: 1rem 0;">FLOOR REACHED: <span id="final-floor">1</span></p>
+                <button class="game-button" onclick="startGame()">🔄 TRY AGAIN</button>
+                <button class="game-button" onclick="showScreen('title-screen')">◀ MAIN MENU</button>
+            </div>
+        </div>
+
+        <!-- WIN SCREEN -->
+        <div id="win-screen" class="screen">
+            <div class="victory-screen">
+                <h2 style="color: #ffff00;">◆ MISSION COMPLETE ◆</h2>
+                <p style="font-size: 1rem; margin: 2rem 0; line-height: 1.6;">
+                    YOU HAVE DEFEATED<br>
+                    ALL CANCER CELLS!<br><br>
+                    THE BODY IS SAVED!
+                </p>
+                <div class="knowledge-gained">
+                    <p style="color: #ffff00; margin-bottom: 1rem;">▼ FINAL WISDOM ▼</p>
+                    <p style="line-height: 1.8;">You have mastered the fundamentals of cancer biology and treatment. Real cancer treatment involves teams of oncologists, surgeons, radiologists, and researchers working together. Every patient's cancer is unique, and treatment is personalized based on genetic testing and tumor characteristics. Continue learning - knowledge is our greatest weapon against cancer.</p>
+                </div>
+                <button class="game-button" onclick="startGame()">🔄 PLAY AGAIN</button>
+                <button class="game-button" onclick="showScreen('title-screen')">◀ MAIN MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            floor: 1,
+            playerHP: 100,
+            playerMaxHP: 100,
+            playerEnergy: 3,
+            playerLevel: 1,
+            currentEnemy: null,
+            analyzed: false
+        };
+
+        // Enemy Database
+        const enemies = [
+            {
+                floor: 1,
+                name: "MELANOMA CELL",
+                sprite: "🦠",
+                hp: 85,
+                attack: 12,
+                description: "A skin cancer cell with BRAF mutations. Vulnerable to targeted therapy like vemurafenib which blocks the mutated BRAF protein. Melanoma can be deadly if not caught early, but targeted therapies have dramatically improved survival rates.",
+                knowledge: "Melanoma accounts for only 1% of skin cancers but causes most skin cancer deaths. The BRAF V600E mutation is present in about 50% of melanomas. When this mutation is present, BRAF inhibitors can shrink tumors in over 80% of patients. However, resistance often develops within a year, which is why combination therapies are now standard."
+            },
+            {
+                floor: 2,
+                name: "LUNG CARCINOMA",
+                sprite: "🫁",
+                hp: 125,
+                attack: 15,
+                description: "Non-small cell lung cancer with EGFR mutations. This mutation makes the cancer cells grow faster, but also makes them vulnerable to EGFR inhibitors like osimertinib. Immunotherapy also works well by unleashing the immune system.",
+                knowledge: "EGFR mutations occur in 10-15% of lung cancers in the US (higher in Asia). These mutations cause cells to receive constant growth signals. EGFR inhibitors block these signals, causing tumor shrinkage in 60-80% of patients with these mutations. Liquid biopsies can detect EGFR mutations from a simple blood draw, avoiding invasive lung biopsies."
+            },
+            {
+                floor: 3,
+                name: "GLIOBLASTOMA",
+                sprite: "🧠",
+                hp: 170,
+                attack: 18,
+                description: "The most aggressive brain tumor. Infiltrates brain tissue like roots of a tree, making complete removal impossible. Treated with surgery, radiation, and temozolomide chemotherapy. The blood-brain barrier makes treatment difficult as most drugs cannot reach it.",
+                knowledge: "Glioblastoma is a Grade 4 brain tumor with median survival of 15 months despite aggressive treatment. It affects about 3 per 100,000 people annually. The tumor's invasive nature and location in the brain present unique challenges. Tumor Treating Fields (TTFields) is a newer treatment using electrical fields that can extend survival when combined with chemotherapy."
+            },
+            {
+                floor: 4,
+                name: "LEUKEMIA CELL",
+                sprite: "🩸",
+                hp: 145,
+                attack: 22,
+                description: "Blood cancer cells multiplying in bone marrow. Unlike solid tumors, leukemia spreads through the bloodstream. Chronic myeloid leukemia (CML) has the BCR-ABL fusion protein - a perfect target for drugs like imatinib (Gleevec).",
+                knowledge: "Imatinib revolutionized CML treatment, transforming it from a fatal disease to a manageable chronic condition. Before imatinib (2001), 5-year survival was under 30%. Now it is over 80% at 10 years. Many patients take one pill daily and live normal lifespans. This was one of the first major successes of targeted therapy and proved the concept of precision medicine."
+            },
+            {
+                floor: 5,
+                name: "METASTATIC TUMOR",
+                sprite: "💀",
+                hp: 220,
+                attack: 25,
+                description: "The final boss. Cancer that has spread throughout the body. No longer curable by surgery alone. Requires systemic treatments - chemotherapy, immunotherapy, targeted therapy - to reach cancer cells everywhere. Represents the most advanced and challenging stage of cancer.",
+                knowledge: "Metastasis causes 90% of cancer deaths. Cancer cells spread through blood or lymph and colonize distant organs. Recent advances in immunotherapy have achieved long-term remission in some metastatic cancers previously considered incurable. Liquid biopsies can detect circulating tumor DNA, helping doctors monitor treatment effectiveness and catch resistance early."
+            }
+        ];
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function showInstructions() {
+            showScreen('instructions-screen');
+        }
+
+        function startGame() {
+            gameState = {
+                floor: 1,
+                playerHP: 100,
+                playerMaxHP: 100,
+                playerEnergy: 3,
+                playerLevel: 1,
+                currentEnemy: null,
+                analyzed: false
+            };
+            loadFloor(1);
+            showScreen('battle-screen');
+        }
+
+        function loadFloor(floorNum) {
+            gameState.floor = floorNum;
+            gameState.analyzed = false;
+            
+            const enemy = JSON.parse(JSON.stringify(enemies[floorNum - 1]));
+            enemy.maxHP = enemy.hp;
+            gameState.currentEnemy = enemy;
+
+            document.getElementById('floor-number').textContent = floorNum;
+            document.getElementById('enemy-sprite').textContent = enemy.sprite;
+            document.getElementById('enemy-name').textContent = enemy.name;
+            document.getElementById('enemy-info').style.display = 'none';
+            document.getElementById('analyze-btn').disabled = false;
+            
+            updateUI();
+            clearLog();
+            addLog(`Floor ${floorNum}: ${enemy.name} appears!`, 'log-info');
+        }
+
+        function updateUI() {
+            document.getElementById('player-hp').textContent = gameState.playerHP;
+            document.getElementById('player-energy').textContent = gameState.playerEnergy;
+            document.getElementById('player-level').textContent = gameState.playerLevel;
+            
+            const playerHealthPercent = (gameState.playerHP / gameState.playerMaxHP) * 100;
+            document.getElementById('player-health-bar').style.width = playerHealthPercent + '%';
+
+            if (gameState.currentEnemy) {
+                const enemyHealthPercent = (gameState.currentEnemy.hp / gameState.currentEnemy.maxHP) * 100;
+                document.getElementById('enemy-health-bar').style.width = enemyHealthPercent + '%';
+                document.getElementById('enemy-hp').textContent = 
+                    `HP: ${gameState.currentEnemy.hp}/${gameState.currentEnemy.maxHP}`;
+            }
+
+            document.getElementById('targeted-btn').disabled = gameState.playerEnergy < 1;
+        }
+
+        function addLog(message, className = '') {
+            const log = document.getElementById('battle-log');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry ' + className;
+            entry.textContent = '> ' + message;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('battle-log').innerHTML = '';
+        }
+
+        function playerAttack() {
+            const damage = 18 + (gameState.playerLevel * 3);
+            gameState.currentEnemy.hp -= damage;
+            addLog(`You attack for ${damage} damage!`, 'log-damage');
+            
+            checkBattleEnd() || enemyTurn();
+        }
+
+        function playerTargetedTherapy() {
+            if (gameState.playerEnergy < 1) return;
+            
+            gameState.playerEnergy--;
+            const baseDamage = 18 + (gameState.playerLevel * 3);
+            const damage = Math.floor(baseDamage * 2.2);
+            gameState.currentEnemy.hp -= damage;
+            addLog(`TARGETED THERAPY hits for ${damage} damage!`, 'log-damage');
+            addLog('Critical hit! Exploited genetic weakness!', 'log-info');
+            
+            checkBattleEnd() || enemyTurn();
+        }
+
+        function playerImmunotherapy() {
+            const heal = 25;
+            gameState.playerHP = Math.min(gameState.playerMaxHP, gameState.playerHP + heal);
+            gameState.playerEnergy = Math.min(3, gameState.playerEnergy + 1);
+            addLog(`Immunotherapy heals ${heal} HP and restores 1 energy!`, 'log-heal');
+            
+            checkBattleEnd() || enemyTurn();
+        }
+
+        function analyzeEnemy() {
+            gameState.analyzed = true;
+            document.getElementById('enemy-info').style.display = 'block';
+            document.getElementById('enemy-description').textContent = gameState.currentEnemy.description;
+            document.getElementById('analyze-btn').disabled = true;
+            addLog('Analysis complete! Weakness identified!', 'log-info');
+            
+            enemyTurn();
+        }
+
+        function enemyTurn() {
+            updateUI();
+            
+            setTimeout(() => {
+                const damage = gameState.currentEnemy.attack;
+                gameState.playerHP -= damage;
+                addLog(`${gameState.currentEnemy.name} attacks for ${damage} damage!`, 'log-damage');
+                
+                updateUI();
+                checkBattleEnd();
+            }, 1000);
+        }
+
+        function checkBattleEnd() {
+            if (gameState.currentEnemy.hp <= 0) {
+                victory();
+                return true;
+            }
+            
+            if (gameState.playerHP <= 0) {
+                gameOver();
+                return true;
+            }
+            
+            return false;
+        }
+
+        function victory() {
+            document.getElementById('knowledge-text').textContent = gameState.currentEnemy.knowledge;
+            showScreen('victory-screen');
+        }
+
+        function nextFloor() {
+            gameState.playerLevel++;
+            gameState.playerEnergy = 3;
+            gameState.playerHP = Math.min(gameState.playerMaxHP, gameState.playerHP + 30);
+            
+            if (gameState.floor >= 5) {
+                showScreen('win-screen');
+            } else {
+                loadFloor(gameState.floor + 1);
+                showScreen('battle-screen');
+            }
+        }
+
+        function gameOver() {
+            document.getElementById('final-floor').textContent = gameState.floor;
+            showScreen('game-over-screen');
+        }
+
+        // CRT flicker effect
+        setInterval(() => {
+            document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
+        }, 100);
+    </script>
+</body>
+</html>
