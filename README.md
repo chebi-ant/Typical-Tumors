@@ -1,60 +1,14 @@
-🎮 TYPICAL TUMORS: CANCER CURIOSITY 🎮
-Show Image
-Show Image
-▼ MISSION BRIEFING ▼
-Welcome to Typical Tumors, a retro gaming-styled educational blog dedicated to making cancer science accessible, engaging, and understandable. This project transforms complex oncology concepts into digestible content presented through an 8-bit aesthetic.
-🕹️ FEATURES
+Typical Tumors: Cancer Curiosity is a retro gaming–styled educational platform designed to make cancer science accessible, engaging, and understandable. The project transforms complex concepts from oncology, cancer biology, treatment, and research into digestible explanations presented through an 8-bit, terminal-inspired aesthetic. By combining clear scientific communication with interactive design, Typical Tumors lowers the barrier to understanding cancer without compromising medical accuracy or sensitivity toward patients and families.
 
-Cancer Curiosity Blog - 50+ posts exploring cancer biology, treatments, and research
-Retro Gaming Aesthetic - Classic terminal green-on-black design with CRT effects
-Disease Dungeon - Educational game (coming soon)
-Interactive Resources - Learning materials and guides (coming soon)
-Cancer Quizzes - Test your knowledge (coming soon)
+The platform features an extensive Cancer Curiosity Blog with over fifty posts exploring cancer biology, modern treatments, prevention strategies, and emerging research. The site is built around a classic green-on-black visual style inspired by early computer terminals and arcade systems. Disease Dungeon, an educational turn-based game currently in beta, allows users to battle cancer cells while learning real oncology concepts through gameplay. Additional interactive learning tools and cancer knowledge quizzes are in development to further reinforce understanding through engagement.
 
-🚀 TECH STACK
+Typical Tumors is built using HTML5, CSS3, and vanilla JavaScript, with no external frameworks or dependencies, and is fully responsive across devices. The site is hosted on GitHub Pages and requires no installation to use. Users can explore the content by navigating the interface, executing blog posts to read detailed explanations, or entering Disease Dungeon to learn through interactive mechanics.
 
-Pure HTML5, CSS3, and vanilla JavaScript
-No dependencies or frameworks required
-Fully responsive design
-GitHub Pages hosting
+The design philosophy of Typical Tumors emphasizes accessibility by presenting complex science without unnecessary jargon, engagement through gaming language and visuals, accuracy through evidence-based information, and compassion through thoughtful presentation of sensitive topics. The project was created to educate and empower through knowledge, recognizing that cancer affects millions worldwide and that understanding it should not require a medical degree.
 
-📁 PROJECT STRUCTURE
-typical-tumors/
-├── index.html              # Main homepage
-├── blog/                   # Blog post directory
-│   ├── immunotherapy.html
-│   ├── cell-cycle.html
-│   ├── prevention.html
-│   └── [additional posts...]
-└── README.md              # You are here
-🎯 GETTING STARTED
+The live site is available at https://chebi-ant.github.io/Typical-Tumors/#. 
+This project may not be edited or redistributed without explicit permission from the owner.
 
-Clone this repository
-Open index.html in your browser
-Navigate through the retro gaming interface
-Click "EXECUTE" on any blog post to read
+Powered by curiosity.
 
-📝 ADDING NEW BLOG POSTS
-
-Create a new HTML file in the blog/ directory
-Use existing posts as templates
-Update the blog section in index.html to link to your new post
-Maintain the retro gaming style and terminology
-
-🌐 LIVE SITE
-Visit the live site at: https://chebi-ant.github.io/Typical-Tumors/#
-🎨 DESIGN PHILOSOPHY
-
-Accessibility - Complex science made simple
-Engagement - Gaming terminology and visual style
-Accuracy - Evidence-based cancer information
-Compassion - Sensitive to patients and families
-
-📜 LICENSE
-DO NOT EDIT WITHOUT EXPLICIT PERMISSION FROM OWNER
-💚 ABOUT
-Created to educate and empower through knowledge. Cancer affects millions, and understanding it shouldn't require a medical degree.
-
-█▓▒░ POWERED BY CURIOSITY ░▒▓█
-
-"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela
+“Education is the most powerful weapon which you can use to change the world.” — Nelson Mandela
