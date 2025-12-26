@@ -693,12 +693,7 @@
         setInterval(() => {
             document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
         }, 100);
-        // Force browser Back button to return to index.html
-        window.history.pushState(null, "", window.location.href);
-
-        window.addEventListener("popstate", function () {
-        window.location.href = "/index.html";
-        });
+      
     </script>
 </body>
 </html>
