@@ -71,11 +71,6 @@
             color: #00cc00;
         }
 
-        .pixel-border {
-            border: 4px solid #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-        }
-
         nav {
             background: #1a1a1a;
             border-bottom: 4px solid #00ff00;
@@ -234,6 +229,7 @@
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             animation: blink 1.5s infinite;
         }
+
         .badge-yellow {
             display: inline-block;
             background: #ffff00;
@@ -245,6 +241,7 @@
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             animation: blink 1.5s infinite;
         }
+
         @keyframes blink {
             0%, 50%, 100% { opacity: 1; }
             25%, 75% { opacity: 0.7; }
@@ -277,6 +274,26 @@
             box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
         }
 
+        .post-card.featured {
+            border-color: #ffff00;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
+        }
+
+        .post-card.featured:hover {
+            box-shadow: 0 0 35px rgba(255, 255, 0, 0.6);
+        }
+
+        .new-tag {
+            display: inline-block;
+            background: #ffff00;
+            color: #000;
+            font-size: 0.45rem;
+            padding: 0.2rem 0.5rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            animation: blink 1.5s infinite;
+        }
+
         .post-image {
             width: 100%;
             height: 150px;
@@ -295,6 +312,17 @@
             border-bottom: 4px solid #00ff00;
         }
 
+        .post-card.featured .post-image {
+            border-bottom-color: #ffff00;
+            background: repeating-linear-gradient(
+                45deg,
+                #332200,
+                #332200 10px,
+                #443300 10px,
+                #443300 20px
+            );
+        }
+
         .post-content {
             padding: 1rem;
         }
@@ -303,6 +331,10 @@
             color: #00ff00;
             margin-bottom: 0.5rem;
             font-size: 0.7rem;
+        }
+
+        .post-card.featured .post-content h3 {
+            color: #ffff00;
         }
 
         .post-meta {
@@ -350,15 +382,8 @@
             animation: blink 1s infinite;
         }
 
-        .construction::before {
-            top: 1rem;
-            left: 1rem;
-        }
-
-        .construction::after {
-            top: 1rem;
-            right: 1rem;
-        }
+        .construction::before { top: 1rem; left: 1rem; }
+        .construction::after { top: 1rem; right: 1rem; }
 
         .construction-icon {
             font-size: 4rem;
@@ -392,19 +417,8 @@
             border-top: 4px solid #00ff00;
             font-size: 0.6rem;
         }
-        
-        button.read-more {
-            font: inherit;
-        }
 
-        .credit-box {
-            background: #003300;
-            border: 2px solid #00ff00;
-            padding: 1rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: center;
-        }
+        button.read-more { font: inherit; }
 
         .health-bar {
             height: 20px;
@@ -427,32 +441,33 @@
             50% { opacity: 0.8; }
         }
 
+        .section-divider {
+            border: none;
+            border-top: 2px dashed #006600;
+            margin: 2rem 0;
+        }
+
+        .posts-label {
+            color: #006600;
+            font-size: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
         @media (max-width: 768px) {
-            body {
-                font-size: 8px;
-            }
-
-            h1 {
-                font-size: 1.2rem;
-            }
-
-            .nav-content {
-                justify-content: center;
-            }
-
-            .posts-grid {
-                grid-template-columns: 1fr;
-            }
+            body { font-size: 8px; }
+            h1 { font-size: 1.2rem; }
+            .nav-content { justify-content: center; }
+            .posts-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="scanlines"></div>
-    
+
     <header>
         <div class="header-content">
             <h1>▲ TYPICAL TUMORS ▲</h1>
-            <p class="tagline">&gt;&gt;LEVEL UP YOUR KNOWLEDGE &lt;&lt;</p>
+            <p class="tagline">&gt;&gt; LEVEL UP YOUR KNOWLEDGE &lt;&lt;</p>
             <div class="health-bar">
                 <div class="health-fill"></div>
             </div>
@@ -471,6 +486,7 @@
     </nav>
 
     <div class="container">
+
         <!-- HOME SECTION -->
         <section id="home" class="section active">
             <div class="hero">
@@ -487,7 +503,7 @@
                     <span class="badge">NEW POSTS</span>
                 </div>
 
-               <div class="feature-card" onclick="window.location.href='/Typical-Tumors/disease-dungeon.html'">
+                <div class="feature-card" onclick="window.location.href='/Typical-Tumors/disease-dungeon.html'">
                     <h3>■ DISEASE DUNGEON</h3>
                     <p>ENTER THE ARENA. BATTLE CANCER CELLS. UPGRADE YOUR IMMUNE SYSTEM. LEARN THROUGH COMBAT.</p>
                     <span class="badge-yellow">BETA NOW OPEN</span>
@@ -507,7 +523,7 @@
             </div>
         </section>
 
-        <!-- BLOG SECTION -->
+        <!-- BLOG / CURIOSITY SECTION -->
         <section id="curiosity" class="section">
             <div class="hero">
                 <h2>♦ CANCER CURIOSITY ♦</h2>
@@ -515,7 +531,20 @@
                 <p>&gt; LOADING SCIENTIFIC ENTRIES...</p>
             </div>
 
+            <p class="posts-label">&gt; LATEST TRANSMISSION:</p>
             <div class="posts-grid">
+
+                <!-- ★ NEW POST ★ -->
+                <div class="post-card featured">
+                    <div class="post-image">💊</div>
+                    <div class="post-content">
+                        <h3>TREATMENT_PLANS.EXE <span class="new-tag">NEW</span></h3>
+                        <p class="post-meta">JAN 10 2026 | 9 MIN</p>
+                        <p class="post-excerpt">BATTLE STRATEGY UNLOCKED. BUILD YOUR ONCOLOGY PROTOCOL: SURGERY, CHEMO, RADIATION, AND BEYOND...</p>
+                        <a href="/Typical-Tumors/blog/treatment-plans.html" class="read-more">▶ EXECUTE</a>
+                    </div>
+                </div>
+
                 <div class="post-card">
                     <div class="post-image">🧬</div>
                     <div class="post-content">
@@ -575,9 +604,8 @@
                         <a href="/Typical-Tumors/blog/brain-tumors.html" class="read-more">▶ EXECUTE</a>
                     </div>
                 </div>
+
             </div>
-
-
         </section>
 
         <!-- GAME SECTION -->
@@ -592,8 +620,8 @@
                 <p>&gt; FIGHT AGAINST CANCER!</p>
                 <p>&gt; LEARN ABOUT CANCER CELLS!</p>
                 <p style="margin-top: 2rem; color: #ffff00;">&gt;&gt; NOW OPEN &lt;&lt;</p>
-                <button class="read-more" href="/Typical-Tumors/disease-dungeon.html" style="margin-top: 2rem;">
-                ▶ PLAY BETA VERSION
+                <button class="read-more" onclick="window.location.href='/Typical-Tumors/disease-dungeon.html'" style="margin-top: 2rem;">
+                    ▶ PLAY BETA VERSION
                 </button>
             </div>
         </section>
@@ -642,11 +670,12 @@
                 <p>&gt; ALLIES: ALL CURIOUS MINDS WELCOME</p>
             </div>
         </section>
+
     </div>
 
     <footer>
-        <p>█▓▒░ TYPICAL TUMORS░▒▓█</p>
-        <p style="margin-top: 1rem;">© 2025 ALL RIGHTS RESERVED</p>
+        <p>█▓▒░ TYPICAL TUMORS ░▒▓█</p>
+        <p style="margin-top: 1rem;">© 2026 ALL RIGHTS RESERVED</p>
         <p style="margin-top: 0.5rem;">&gt; POWERED BY KNOWLEDGE &lt;</p>
     </footer>
 
@@ -657,21 +686,23 @@
         function showSection(sectionId) {
             sections.forEach(s => s.classList.remove('active'));
             navLinks.forEach(l => l.classList.remove('active'));
-            
             document.getElementById(sectionId).classList.add('active');
             const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
             if (activeLink) activeLink.classList.add('active');
-            
             window.scrollTo(0, 0);
         }
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const section = link.getAttribute('data-section');
-                showSection(section);
+                showSection(link.getAttribute('data-section'));
             });
         });
+
+        // Handle #blog anchor from back links
+        if (window.location.hash === '#blog') {
+            showSection('curiosity');
+        }
 
         // CRT flicker effect
         setInterval(() => {
