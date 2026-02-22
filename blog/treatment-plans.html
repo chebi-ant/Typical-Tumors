@@ -1,1 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TREATMENT_PLANS.EXE - Typical Tumors</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            color: #00ff00;
+            background: #0a0a0a;
+            font-size: 10px;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.05) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.05) 3px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        header {
+            background: #1a1a1a;
+            border-bottom: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: #ffff00;
+            text-decoration: none;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 2px solid #ffff00;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #00ff00;
+            text-shadow: 3px 3px 0 #006600, 0 0 10px #00ff00;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #006600;
+            font-size: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-content {
+            background: #1a1a1a;
+            border: 4px solid #00ff00;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            position: relative;
+        }
+
+        .post-content::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #006600;
+        }
+
+        .post-content h2 {
+            color: #ffff00;
+            font-size: 1rem;
+            margin: 2rem 0 1rem 0;
+            text-shadow: 2px 2px 0 #666600;
+        }
+
+        .post-content p {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box {
+            background: #003300;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box-title {
+            color: #ffff00;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-title {
+            color: #ff0000;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-block {
+            background: #002200;
+            border: 2px solid #00ff00;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .phase-name {
+            color: #ffff00;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-sub {
+            color: #00ff00;
+            font-size: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .highlight {
+            color: #ffff00;
+        }
+
+        .progress-bar-wrap {
+            background: #001100;
+            border: 2px solid #00ff00;
+            height: 24px;
+            margin: 0.5rem 0 1rem 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            display: flex;
+            align-items: center;
+            padding-left: 0.5rem;
+            font-size: 0.5rem;
+            color: #000;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        ul li {
+            color: #00cc00;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        ul li::before {
+            content: '▶ ';
+            color: #ffff00;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-box {
+            background: #002200;
+            border: 2px solid #00ff00;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #006600;
+            font-size: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-value {
+            color: #ffff00;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #00ff00;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #00ff00;
+            font-size: 0.6rem;
+        }
+
+        @media (max-width: 768px) {
+            body { font-size: 8px; }
+            h1 { font-size: 1rem; }
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="../index.html#blog" class="back-link">◀ BACK TO DATABASE</a>
+            <h1>💊 TREATMENT_PLANS.EXE</h1>
+            <p class="post-meta">UPLOADED: JAN 10 2026 | ESTIMATED READ TIME: 9 MIN | CLASSIFICATION: ONCOLOGY-PROTOCOL</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="post-content">
+            <p>&gt; SYSTEM LOADING...</p>
+            <p>&gt; ACCESSING FILE: TREATMENT_PLANS.EXE</p>
+            <p>&gt; LOADING ONCOLOGY PROTOCOL DATABASE...</p>
+
+            <h2>◆ BUILDING YOUR BATTLE STRATEGY ◆</h2>
+            <p>No two cancers are identical. Even the same type of tumor in two different patients can behave completely differently — one might respond to chemotherapy while the other requires surgery, radiation, or a newer targeted approach. This is why treatment planning is one of the most complex and important parts of oncology.</p>
+
+            <p>A cancer treatment plan is a personalized roadmap. It is designed by a multidisciplinary team of specialists and takes into account tumor type, stage, genetic profile, patient health, and treatment goals. Understanding how these plans are built can help patients and families navigate one of the most overwhelming experiences of their lives.</p>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ MULTIDISCIPLINARY TEAM (MDT) ▼</p>
+                <p>Treatment plans are built by a team: medical oncologists, surgical oncologists, radiation oncologists, pathologists, radiologists, nurses, social workers, and pharmacists. The MDT meets regularly to review cases and ensure every angle is covered.</p>
+            </div>
+
+            <h2>◆ PHASE 1: DIAGNOSIS AND STAGING ◆</h2>
+
+            <div class="phase-block">
+                <p class="phase-name">STEP 1 — CONFIRM THE ENEMY</p>
+                <p class="phase-sub">OBJECTIVE: Identify tumor type, grade, and molecular profile</p>
+            </div>
+            <p class="progress-fill" style="padding:0; margin:0 0 1.5rem 0; display:block; color:#ffff00; font-size:0.6rem;">PROGRESS: ██████░░░░░░░░ BIOPSY → PATHOLOGY → MOLECULAR TESTING</p>
+
+            <p>Before any treatment begins, the care team must definitively identify what they are fighting. This starts with biopsy — removing a small piece of tumor tissue for analysis. Pathologists examine the cells under a microscope to determine the cancer type and grade.</p>
+
+            <p>Modern oncology goes deeper. Molecular profiling tests the tumor's DNA for specific mutations, gene expressions, and markers. This data determines which targeted therapies might work, whether immunotherapy is likely to help, and how aggressive the tumor is likely to be.</p>
+
+            <p><span class="highlight">STAGING</span> maps how far cancer has spread. The TNM system grades tumors by size (T), lymph node involvement (N), and distant metastasis (M). Stage I is localized and early; Stage IV means it has spread to distant organs. Staging drives almost every major treatment decision.</p>
+
+            <h2>◆ PHASE 2: GOAL SETTING ◆</h2>
+
+            <div class="phase-block">
+                <p class="phase-name">CURATIVE vs. PALLIATIVE</p>
+                <p class="phase-sub">Two fundamentally different mission objectives</p>
+            </div>
+
+            <p>Not all treatment plans have the same goal. This is a critical concept that patients sometimes do not fully understand until deep into treatment.</p>
+
+            <p><span class="highlight">CURATIVE INTENT:</span> The goal is to eliminate all cancer from the body. This applies to early-stage cancers and many cancers that respond strongly to treatment. Surgery, chemo, and radiation may all be used aggressively.</p>
+
+            <p><span class="highlight">PALLIATIVE INTENT:</span> The goal is to control the cancer, relieve symptoms, and extend quality of life — not necessarily to cure. This applies to advanced cancers that cannot be eliminated. Palliative care is not giving up; it is fighting smart.</p>
+
+            <p><span class="highlight">NEOADJUVANT vs. ADJUVANT:</span> Treatment given before surgery (to shrink the tumor) is neoadjuvant. Treatment given after surgery (to kill remaining cells) is adjuvant. Both play critical roles in reducing recurrence risk.</p>
+
+            <div class="warning-box">
+                <p class="warning-title">⚠️ IMPORTANT ⚠️</p>
+                <p>Always ask your oncologist whether treatment is curative or palliative in intent. Understanding the goal changes how you think about side effects, intensity, and planning for the future.</p>
+            </div>
+
+            <h2>◆ PHASE 3: SELECTING YOUR WEAPONS ◆</h2>
+
+            <div class="phase-block">
+                <p class="phase-name">TREATMENT MODALITIES</p>
+                <p class="phase-sub">SURGERY | RADIATION | CHEMOTHERAPY | TARGETED THERAPY | IMMUNOTHERAPY | HORMONE THERAPY</p>
+            </div>
+
+            <p>Modern oncology has six primary weapons. Most treatment plans combine several of these into a multi-modal strategy.</p>
+
+            <p><span class="highlight">SURGERY:</span> For solid tumors, surgery remains the most effective way to remove the primary mass. Advances like robotic surgery, laparoscopic techniques, and intraoperative imaging make it possible to remove tumors with greater precision and less damage to surrounding tissue than ever before.</p>
+
+            <p><span class="highlight">RADIATION THERAPY:</span> Uses high-energy beams to destroy cancer cell DNA so they cannot replicate. External beam radiation, brachytherapy (internal radiation seeds), and stereotactic radiosurgery are all tools in the arsenal. Radiation is often combined with chemotherapy, which sensitizes cells to radiation damage.</p>
+
+            <p><span class="highlight">CHEMOTHERAPY:</span> Systemic drugs that kill fast-dividing cells. Because cancer cells divide faster than most normal cells, chemo targets them preferentially — though it also affects hair follicles, gut lining, and bone marrow, causing well-known side effects. Chemo is given in cycles to allow recovery between rounds.</p>
+
+            <p><span class="highlight">TARGETED THERAPY:</span> Drugs engineered to hit specific molecular targets — like HER2 in some breast cancers or EGFR in certain lung cancers. Much more precise than chemo and often with fewer systemic side effects, but only works if the tumor has the matching target.</p>
+
+            <p><span class="highlight">IMMUNOTHERAPY:</span> Unleashes the immune system against cancer. Checkpoint inhibitors remove the "brakes" that cancer cells use to hide from immune cells. CAR-T cell therapy rewires patient T-cells to hunt specific cancer antigens. A genuine revolution in oncology over the past decade.</p>
+
+            <p><span class="highlight">HORMONE THERAPY:</span> For hormone-sensitive cancers like many breast and prostate cancers. Drugs like tamoxifen or androgen deprivation therapy starve tumors that depend on estrogen or testosterone to grow.</p>
+
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <p class="stat-label">5-YEAR SURVIVAL (ALL CANCERS)</p>
+                    <p class="stat-value">~68%</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-label">IMPROVEMENT SINCE 1970s</p>
+                    <p class="stat-value">+20%</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-label">CLINICAL TRIALS ACTIVE (USA)</p>
+                    <p class="stat-value">6,000+</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-label">FDA CANCER DRUG APPROVALS (2023)</p>
+                    <p class="stat-value">14</p>
+                </div>
+            </div>
+
+            <h2>◆ PHASE 4: MONITORING AND RESPONSE ◆</h2>
+            <p>Treatment plans are not static. Oncologists track tumor response using imaging, blood markers, and symptom assessment throughout treatment. Response categories include:</p>
+
+            <ul>
+                <li><span class="highlight">COMPLETE RESPONSE:</span> No detectable tumor remaining</li>
+                <li><span class="highlight">PARTIAL RESPONSE:</span> Tumor shrank by more than 30%</li>
+                <li><span class="highlight">STABLE DISEASE:</span> Neither growing nor shrinking</li>
+                <li><span class="highlight">PROGRESSIVE DISEASE:</span> Tumor is growing despite treatment</li>
+            </ul>
+
+            <p>If a tumor progresses, oncologists pivot to second-line treatment — alternative drug regimens or modalities. Many cancers that stop responding to first-line therapy can still be controlled with subsequent treatment lines.</p>
+
+            <h2>◆ PHASE 5: CLINICAL TRIALS ◆</h2>
+            <p>Clinical trials offer access to cutting-edge treatments not yet widely available. They are especially important for cancers with limited standard treatment options. There are four phases:</p>
+
+            <ul>
+                <li><span class="highlight">PHASE I:</span> Testing safety and dosing in a small group</li>
+                <li><span class="highlight">PHASE II:</span> Testing efficacy in a larger group</li>
+                <li><span class="highlight">PHASE III:</span> Comparing new treatment against standard of care</li>
+                <li><span class="highlight">PHASE IV:</span> Post-approval monitoring for long-term effects</li>
+            </ul>
+
+            <div class="info-box">
+                <p class="info-box-title">▼ FINDING TRIALS ▼</p>
+                <p>ClinicalTrials.gov lists all active trials in the US. Ask your oncologist if any trials match your profile. Trial participation drives the future of oncology — each generation of patients benefits from the courage of those before them.</p>
+            </div>
+
+            <h2>◆ SURVIVORSHIP: AFTER THE BATTLE ◆</h2>
+            <p>Treatment ending is not the final chapter. Survivorship care plans address long-term monitoring for recurrence, managing late side effects of treatment, mental health support, and return to normal life. Oncologists schedule regular follow-up scans and bloodwork, typically every 3-6 months in early survivorship, extending to annual checks over time.</p>
+
+            <p>Late effects — side effects that appear months or years after treatment ends — can include heart problems from certain chemo drugs, cognitive changes from brain radiation, or secondary cancers from radiation exposure. Survivorship clinics specialize in monitoring and managing these long-term challenges.</p>
+
+            <h2>◆ FINAL BOSS WISDOM ◆</h2>
+            <p>A cancer treatment plan is not a sentence handed down from above — it is a collaborative, evolving strategy built with your oncology team. Patients who understand their plan, ask questions, and advocate for themselves achieve better outcomes. Knowledge is your most powerful weapon.</p>
+
+            <p>Never hesitate to seek a second opinion. The best oncologists expect and encourage it. And remember: the plan can always be updated.</p>
+
+            <p>&gt; END OF FILE</p>
+            <p>&gt; ONCOLOGY PROTOCOL DATABASE: UPDATED</p>
+            <p>&gt; ACHIEVEMENT UNLOCKED: TREATMENT STRATEGIST</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>█▓▒░ TYPICAL TUMORS: CANCER CURIOSITY ░▒▓█</p>
+        <p style="margin-top: 1rem;">© 2026 ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script>
+        setInterval(() => {
+            document.body.style.opacity = Math.random() > 0.97 ? '0.95' : '1';
+        }, 100);
+    </script>
+</body>
+</html>
